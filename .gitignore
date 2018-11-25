@@ -1,3 +1,7 @@
+# Google o-oath credentials details
+credentials.json
+
+# Project folders excluded
 coverage/
 node_modules/
 dist/
