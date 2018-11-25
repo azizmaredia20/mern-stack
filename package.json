@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:server": "rimraf lib && ./node_modules/.bin/babel server --out-dir lib",
-    "build:client": "rimraf dist && webpack --mode development",
+    "build:client": "rimraf dist && webpack",
     "build": "npm run build:server && npm run build:client",
     "start:client": "webpack-dev-server --inline --hot",
     "start:server": "nodemon server/index.js --exec babel-node --presets babel-preset-env",
@@ -20,7 +20,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
-    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "redux": "^4.0.1"
   },
   "devDependencies": {
@@ -29,17 +29,15 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.5",
     "node-sass": "^4.10.0",
     "nodemon": "^1.18.6",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.26.0",
+    "webpack": "^3.12.0",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
+    "webpack-dev-server": "^2.11.3",
     "webpack-manifest-plugin": "^2.0.4"
   }
 }

@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
-class HelloMessage extends React.Component {
-    render() {
-      return (
-        <div>
-          Hello {this.props.name}
-        </div>
-      );
-    }
-  }
-  
-  ReactDOM.render(
-    <HelloMessage name="Aziz" />,
-    document.getElementById('root')
-  );
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Main from './containers/Main'
+
+const App = (props) => (
+    <div>
+        <Header />
+            <Main />
+        <Footer />
+    </div>
+);
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);

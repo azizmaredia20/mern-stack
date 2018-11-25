@@ -1,71 +1,58 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const env = process.env.NODE_ENV
-
-module.exports = (env, argv) => ({
+module.exports = {
     context: path.join(__dirname, 'client'),
-    mode: argv.mode === 'production' ? 'production' : 'development',
     entry: {
         app: './index.js',
+        vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux'],
         styles: './assets/main.scss',
     },
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name][hash].js',
     },
-    devtool: argv.mode === 'production' ? 'eval' : 'source-maps',
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                styles: {
-                    name: 'styles',
-                    test: /\.css$/,
-                    chunks: 'all',
-                    enforce: true
-                }
-            },
-            chunks: 'all'
-        }
-    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: "./index.html",
+            filename: "./index.html"
+        }),
+        new ExtractTextPlugin('style.bundle.css'),
+    ],
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                }
+                use: [
+                    'babel-loader',
+                ],
             },
             {
                 test: /\.(sa|sc|c)ss$/,
-                use: [
-                    argv.mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
-                    'css-loader',
-                    'sass-loader',
-                ],
-            }
-        ]
+                loader: ExtractTextPlugin.extract({
+                    use: [
+                        'css-loader',
+                        'sass-loader'
+                    ],
+                }),
+            },
+            // {
+            //     test: /\.(png|jpg|gif)$/,
+            //     use: [
+            //         'file-loader',
+            //     ],
+            // },
+        ],
     },
-    plugins: [
-        new ManifestPlugin(),
-        new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin({
-            template: "./index.html",
-            filename: "./index.html"
-        }),
-        new MiniCssExtractPlugin({
-            filename: path.join(__dirname, 'dist', 'styles.css'),
-        }),
-    ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         historyApiFallback: true,
         stats: { colors: true, chunks: false },
         port: "8282",
     },
-});
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
+};
