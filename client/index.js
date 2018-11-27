@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import Header from './components/Header';
+import Header from './containers/Header';
 import Footer from './components/Footer';
 import Main from './containers/Main'
 
 const App = (props) => (
-    <div>
-        <Header />
-            <Main />
-        <Footer />
-    </div>
+    <BrowserRouter basename="/">
+        <div>
+            <Header />
+                <Main />
+            <Footer />
+        </div>
+    </BrowserRouter>
 );
 
 ReactDOM.render(

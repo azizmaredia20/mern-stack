@@ -6,7 +6,7 @@ module.exports = {
     context: path.join(__dirname, 'client'),
     entry: {
         app: './index.js',
-        vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux', 'googleapis'],
+        vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux'],
         styles: './assets/main.scss',
     },
     output: {
