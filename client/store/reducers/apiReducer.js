@@ -25,7 +25,7 @@ const initialState = fromJS({
     error: null,
 })
 
-export default apiReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
     const { type } = action;
     switch (type) {
         case API_LOADING:

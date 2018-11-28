@@ -5,9 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Header from './containers/Header';
 import Footer from './components/Footer';
-import Main from './containers/Main'
+import Main from './containers/Main';
+import store from './store';
 
 const App = (props) => (
+    <Provider store={store}>
     <BrowserRouter basename="/">
         <div>
             <Header />
@@ -15,6 +17,7 @@ const App = (props) => (
             <Footer />
         </div>
     </BrowserRouter>
+    </Provider>
 );
 
 ReactDOM.render(
